@@ -21,8 +21,8 @@ class CreateAccountsTable extends Migration
             $table->integer('account_type_id');
             $table->integer('currency_id');
             $table->integer('branch_id');
-            $table->string('created_by');
-            $table->string('updated_by');
+            $table->bigInteger('created_by')->unsigned();
+            $table->bigInteger('updated_by')->unsigned();
             $table->dateTime('created_at');
             $table->dateTime('updated_at');
 
@@ -31,6 +31,14 @@ class CreateAccountsTable extends Migration
                 ->on('customers')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
+            
+            $table->foreign('created_by')
+                ->references('id')
+                ->on('users');
+
+            $table->foreign('updated_by')
+                ->references('id')
+                ->on('users');
 
         });
     }

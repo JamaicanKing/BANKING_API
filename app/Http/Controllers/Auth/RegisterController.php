@@ -7,7 +7,9 @@ use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
+use App\Models\Department;
 
 class RegisterController extends Controller
 {
@@ -50,8 +52,10 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
+            'firstname' => ['required', 'string', 'max:255'],
+            'lastname' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'department_id' => ['required', 'integer','exists:departments,id'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
@@ -65,9 +69,23 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         return User::create([
-            'name' => $data['name'],
+            'firstname' => $data['firstname'],
+            'lastname' => $data['lastname'],
             'email' => $data['email'],
+            'department_id' => $data['department_id'],
             'password' => Hash::make($data['password']),
-        ]);
+            'created_by' => 1,
+            'updated_by' => 1,
+            
+            ]);
     }
+
+    public function showRegistrationForm()
+    {
+        $departments = Department::all(['id','name']);
+
+        return view('auth.register',['departments' => $departments]);
+    }
+
+
 }

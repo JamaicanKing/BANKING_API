@@ -16,8 +16,8 @@ class CreateUserRolesTable extends Migration
         Schema::create('user_roles', function (Blueprint $table) {
             $table->Biginteger('user_id')->unsigned();
             $table->BIginteger('role_id')->unsigned();
-            $table->string('created_by');
-            $table->string('updated_by');
+            $table->bigInteger('created_by')->unsigned();
+            $table->bigInteger('updated_by')->unsigned();
             $table->dateTime('created_at');
             $table->dateTime('updated_at');
 
@@ -34,6 +34,14 @@ class CreateUserRolesTable extends Migration
                 ->on('users')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
+
+            $table->foreign('created_by')
+                ->references('id')
+                ->on('users');
+
+            $table->foreign('updated_by')
+                ->references('id')
+                ->on('users');
 
         });
     }

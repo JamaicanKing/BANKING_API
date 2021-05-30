@@ -20,8 +20,8 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->BigInteger('department_id')->unsigned();
             $table->string('password');
-            $table->string('created_by');
-            $table->string('updated_by');
+            $table->bigInteger('created_by')->unsigned();
+            $table->bigInteger('updated_by')->unsigned();
             $table->dateTime('created_at');
             $table->dateTime('updated_at');
 
@@ -30,6 +30,14 @@ class CreateUsersTable extends Migration
                 ->on('departments')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
+
+            $table->foreign('created_by')
+                ->references('id')
+                ->on('users');
+
+            $table->foreign('updated_by')
+                ->references('id')
+                ->on('users');
 
         });
     }
