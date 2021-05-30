@@ -6,7 +6,7 @@
             <option selected value="">{{__($defaultDropDownOption) }}</option>
             @if(isset($options))
                 @foreach ($options as $option)
-                    <option {{ (isset($selected) && $selecteId == $option->id) ? 'selected' : ''}} value="{{ $option->id ?? '' }}">{{ __($option->name ?? '') }}</option>
+                    <option {{ (isset($selectedId) && $selectedId == $option->id) ? 'selected' : ''}} value="{{ $option->id ?? '' }}">{{ __($option->name ?? '') }}</option>
                 @endforeach
             @endif
 
