@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Department;
+use App\Models\AccountType;
 use Illuminate\Http\Request;
 
-
-class DepartmentController extends Controller
+class AccountTypeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +14,9 @@ class DepartmentController extends Controller
      */
     public function index()
     {
-        $departments = Department::all();
+        $accountTypes = AccountType::all();
 
-        return view('departments.index',['departments' => $departments]);
+        return view('accountTypes.index',['accountTypes' => $accountTypes]);
     }
 
     /**
@@ -27,8 +26,9 @@ class DepartmentController extends Controller
      */
     public function create()
     {
-        $departments = Department::all();
-        return view('departments.create',['departments' => $departments]);
+        $accountTypes = AccountType::all();
+
+        return view('accountTypes.create',['accountTypes' => $accountTypes]);
     }
 
     /**
@@ -39,23 +39,24 @@ class DepartmentController extends Controller
      */
     public function store(Request $request)
     {
-        $department = Department::create([
+        $accountType = AccountType::create([
             'name' => $request->input('name'),
+            'interest' => $request->input('interest'),
             'created_at' => date('Y-m-d H:i:s'),
             'created_by' => 1,
             'updated_by' => 1,
         ]);
 
-        return redirect()->route("departments.index");
+        return redirect()->route("accountTypes.index");
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Department  $department
+     * @param  \App\Models\AccountType  $accountType
      * @return \Illuminate\Http\Response
      */
-    public function show(Department $department)
+    public function show(AccountType $accountType)
     {
         //
     }
@@ -63,43 +64,43 @@ class DepartmentController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Department  $department
+     * @param  \App\Models\AccountType  $accountType
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $department = Department::find($id);
+        $accountType = AccountType::find($id);
 
-        return view('departments.edit',['department' => $department]);
+        return view('accountTypes.edit',['accountType' => $accountType]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Department  $department
+     * @param  \App\Models\AccountType  $accountType
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,$id)
+    public function update(Request $request, $id)
     {
-        $department = Department::find($id);
-        $department->name = $request->input('name');
+        $accountType = AccountType::find($id);
+        $accountType->name = $request->input('name');
+        $accountType->interest = $request->input('interest');
 
-        $department->save();
+        $accountType->save();
 
-        return redirect()->route('departments.index');
+        return redirect()->route('accountTypes.index');
     }
+    
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Department  $department
+     * @param  \App\Models\AccountType  $accountType
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(AccountType $accountType)
     {
-        $udepartment = department::destroy($id);
-
-        return redirect()->route('departments.index');
+        //
     }
 }

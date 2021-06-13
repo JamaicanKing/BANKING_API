@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Department;
+use App\Models\TransactionType;
 use Illuminate\Http\Request;
 
-
-class DepartmentController extends Controller
+class TransactionTypeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +14,9 @@ class DepartmentController extends Controller
      */
     public function index()
     {
-        $departments = Department::all();
+        $transactionTypes = TransactionType::all();
 
-        return view('departments.index',['departments' => $departments]);
+        return view('transactionTypes.index',['transactionTypes' => $transactionTypes]);
     }
 
     /**
@@ -27,8 +26,9 @@ class DepartmentController extends Controller
      */
     public function create()
     {
-        $departments = Department::all();
-        return view('departments.create',['departments' => $departments]);
+        $transactionType = TransactionType::all();
+
+        return view('transactionTypes.create',['transactionType' => $transactionType]);
     }
 
     /**
@@ -39,23 +39,23 @@ class DepartmentController extends Controller
      */
     public function store(Request $request)
     {
-        $department = Department::create([
+        $transactionType = TransactionType::create([
             'name' => $request->input('name'),
             'created_at' => date('Y-m-d H:i:s'),
             'created_by' => 1,
             'updated_by' => 1,
         ]);
 
-        return redirect()->route("departments.index");
+        return redirect()->route("transactionTypes.index");
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Department  $department
+     * @param  \App\Models\TransactionType  $transactionType
      * @return \Illuminate\Http\Response
      */
-    public function show(Department $department)
+    public function show(TransactionType $transactionType)
     {
         //
     }
@@ -63,43 +63,36 @@ class DepartmentController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Department  $department
+     * @param  \App\Models\TransactionType  $transactionType
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(TransactionType $transactionType)
     {
-        $department = Department::find($id);
-
-        return view('departments.edit',['department' => $department]);
+        //
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Department  $department
+     * @param  \App\Models\TransactionType  $transactionType
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,$id)
+    public function update(Request $request, TransactionType $transactionType)
     {
-        $department = Department::find($id);
-        $department->name = $request->input('name');
-
-        $department->save();
-
-        return redirect()->route('departments.index');
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Department  $department
+     * @param  \App\Models\TransactionType  $transactionType
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $udepartment = department::destroy($id);
+        $transactionType = TransactionType::destroy($id);
 
-        return redirect()->route('departments.index');
+        return redirect()->route('transactionTypes.index');
     }
 }

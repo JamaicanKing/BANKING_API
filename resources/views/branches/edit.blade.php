@@ -1,44 +1,27 @@
 @extends('layouts.app')
 
-
-
 @section('content')
 
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Update User') }}</div>
+                <div class="card-header">{{ __('Update Department') }}</div>
 
                 <div class="card-body">
 
-                    <form method="POST" action="{{ route('users.update',['user' => $user->id],) }}" >
+                    <form method="POST" action="{{ route('branches.update',['branch' => $branches->id],) }}" >
                         @csrf
                         @method('PUT')
-                        
-                        
+
+                    
                             <div class="form-group row">
-                                <label for="firstname" class="col-md-4 col-form-label text-md-right">{{ __('First Name') }}</label>
+                                <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Account Number') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="firstname" type="text" class="form-control @error('firstname') is-invalid @enderror" name="firstname" value="{{ $user->firstname }}" required autocomplete="firstname" autofocus>
+                                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ $branches->name }}" required autocomplete="name" autofocus>
 
-                                    @error('firstname')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-                        
-
-                            <div class="form-group row">
-                                <label for="lastname" class="col-md-4 col-form-label text-md-right">{{ __('Last Name') }}</label>
-
-                                <div class="col-md-6">
-                                    <input id="lastname" type="text" class="form-control @error('lastname') is-invalid @enderror" name="lastname" value="{{ $user->lastname }}" required autocomplete="lastname" autofocus>
-
-                                    @error('lastname')
+                                    @error('name')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
@@ -47,12 +30,12 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Email') }}</label>
+                                <label for="address" class="col-md-4 col-form-label text-md-right">{{ __('Address ') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="email" type="text" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $user->email }}" required autocomplete="email" autofocus>
+                                    <input id="address" type="text" class="form-control @error('address') is-invalid @enderror" name="address" value="{{ $branches->address }}" required autocomplete="address" autofocus>
 
-                                    @error('email')
+                                    @error('address')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
@@ -60,15 +43,19 @@
                                 </div>
                             </div>
 
-                            @include('components.common.dropDown',
-                            [
-                                'fieldLabel' => 'Department',
-                                'fieldName' => 'department_id',
-                                'defaultDropDownOption' => 'Please select a department',
-                                'options' => $departments,
-                                'selectedId' => $user->department_id
+                            <div class="form-group row">
+                                <label for="phone_number" class="col-md-4 col-form-label text-md-right">{{ __('Phone Number ') }}</label>
 
-                            ])
+                                <div class="col-md-6">
+                                    <input id="phone_number" type="text" class="form-control @error('phone_number') is-invalid @enderror" name="phone_number" value="{{ $branches->phone_number }}" required autocomplete="phone_number" autofocus>
+
+                                    @error('phone_number')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
                             
                             <div class="form-group row">
                             <div class="col-md-10 text-right">

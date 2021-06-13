@@ -61,7 +61,45 @@
                                     
                                     <a class="dropdown-item" href="{{ route('users.index') }}">
                                      {{ __('User Management') }}
-                                 </a>
+                                    </a>
+
+                                    <a class="dropdown-item" href="{{ route('customers.index') }}">
+                                        {{ __('Customer Management') }}
+                                    </a>
+
+                                    <a class="dropdown-item" href="{{ route('departments.index') }}">
+                                        {{ __('Department Management') }}
+                                    </a>
+
+                                    <a class="dropdown-item" href="{{ route('accounts.index') }}">
+                                        {{ __('Account Management') }}
+                                    </a>
+
+                                    <a class="dropdown-item" href="{{ route('branches.index') }}">
+                                        {{ __('Branch Management') }}
+                                    </a>
+
+                                    <a class="dropdown-item" href="{{ route('accountTypes.index') }}">
+                                        {{ __('Account Type Management') }}
+                                    </a>
+
+                                    <a class="dropdown-item" href="{{ route('secondaryAccountHolders.index') }}">
+                                        {{ __('Secondary Accounts Management') }}
+                                    </a>
+
+                                    <a class="dropdown-item" href="{{ route('currency.index') }}">
+                                        {{ __('Currency Management') }}
+                                    </a>
+
+                                    <a class="dropdown-item" href="{{ route('transactions.index') }}">
+                                        {{ __('Transaction Management') }}
+                                    </a>
+
+                                    <a class="dropdown-item" href="{{ route('transactionTypes.index') }}">
+                                        {{ __('Transaction Type Management') }}
+                                    </a>
+
+                                    
                                     
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();

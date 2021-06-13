@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Department;
+use App\Models\Currency;
 use Illuminate\Http\Request;
 
-
-class DepartmentController extends Controller
+class CurrencyController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +14,9 @@ class DepartmentController extends Controller
      */
     public function index()
     {
-        $departments = Department::all();
+        $currencies = Currency::all();
 
-        return view('departments.index',['departments' => $departments]);
+        return view('currency.index',['currencies' => $currencies]);
     }
 
     /**
@@ -27,8 +26,8 @@ class DepartmentController extends Controller
      */
     public function create()
     {
-        $departments = Department::all();
-        return view('departments.create',['departments' => $departments]);
+        $currencies = Currency::all();
+        return view('currency.create',['currencies' => $currencies]);
     }
 
     /**
@@ -39,23 +38,23 @@ class DepartmentController extends Controller
      */
     public function store(Request $request)
     {
-        $department = Department::create([
+        $currency = Currency::create([
             'name' => $request->input('name'),
             'created_at' => date('Y-m-d H:i:s'),
             'created_by' => 1,
             'updated_by' => 1,
         ]);
 
-        return redirect()->route("departments.index");
+        return redirect()->route("currency.index");
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Department  $department
+     * @param  \App\Models\Currency  $currency
      * @return \Illuminate\Http\Response
      */
-    public function show(Department $department)
+    public function show(Currency $currency)
     {
         //
     }
@@ -63,43 +62,43 @@ class DepartmentController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Department  $department
+     * @param  \App\Models\Currency  $currency
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $department = Department::find($id);
+        $currencies = Currency::find($id);
 
-        return view('departments.edit',['department' => $department]);
+        return view('currency.edit',['currencies' => $currencies]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Department  $department
+     * @param  \App\Models\Currency  $currency
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,$id)
+    public function update(Request $request, $id)
     {
-        $department = Department::find($id);
-        $department->name = $request->input('name');
+        $currency = Currency::find($id);
+        $currency->name = $request->input('name');
 
-        $department->save();
+        $currency->save();
 
-        return redirect()->route('departments.index');
+        return redirect()->route('currency.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Department  $department
+     * @param  \App\Models\Currency  $currency
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $udepartment = department::destroy($id);
+        $currency = Currency::destroy($id);
 
-        return redirect()->route('departments.index');
+        return redirect()->route('currency.index');
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Department;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -15,7 +16,12 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::all();
+        $users = DB::SELECT("SELECT 
+        *
+        FROM `users`
+        INNER JOIN departments ON users.department_id = departments.id"
+        );
+        
 
         return view('users.index',['users' => $users]);
     }

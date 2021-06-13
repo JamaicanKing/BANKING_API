@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Department;
+use App\Models\Branches;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
-
-class DepartmentController extends Controller
+class BranchesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +15,9 @@ class DepartmentController extends Controller
      */
     public function index()
     {
-        $departments = Department::all();
+        $branches = Branches::all();
 
-        return view('departments.index',['departments' => $departments]);
+        return view('branches.index',['branches' => $branches]);
     }
 
     /**
@@ -27,8 +27,9 @@ class DepartmentController extends Controller
      */
     public function create()
     {
-        $departments = Department::all();
-        return view('departments.create',['departments' => $departments]);
+        $branches =  Branches::all();
+
+        return view('branches.create',['$branches' => $branches]);
     }
 
     /**
@@ -39,23 +40,25 @@ class DepartmentController extends Controller
      */
     public function store(Request $request)
     {
-        $department = Department::create([
+        $branch = Branches::create([
             'name' => $request->input('name'),
+            'address' => $request->input('address'),
+            'phone_number' => $request->input('phone_number'),
             'created_at' => date('Y-m-d H:i:s'),
             'created_by' => 1,
             'updated_by' => 1,
         ]);
 
-        return redirect()->route("departments.index");
+        return redirect()->route("branches.index");
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Department  $department
+     * @param  \App\Models\Branches  $branches
      * @return \Illuminate\Http\Response
      */
-    public function show(Department $department)
+    public function show(Branches $branches)
     {
         //
     }
@@ -63,43 +66,48 @@ class DepartmentController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Department  $department
+     * @param  \App\Models\Branches  $branches
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $department = Department::find($id);
+        $branches = Branches::find($id);
 
-        return view('departments.edit',['department' => $department]);
+        return view('branches.edit',['branches' => $branches]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Department  $department
+     * @param  \App\Models\Branches  $branches
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,$id)
+    public function update(Request $request, $id)
     {
-        $department = Department::find($id);
-        $department->name = $request->input('name');
+        $branches = Branches::find($id);
+        $branches->name = $request->input('name');
+        $branches->address = $request->input('address');
+        $branches->phone_number = $request->input('phone_number');
 
-        $department->save();
+        $branches->save();
 
-        return redirect()->route('departments.index');
+        return redirect()->route('branches.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Department  $department
+     * @param  \App\Models\Branches  $branches
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $udepartment = department::destroy($id);
+        
+        $branch = Branches::find($id);
+        Log::info($branch);
+        $branch->delete();
 
-        return redirect()->route('departments.index');
+        return redirect()->route('branches.index');
     }
 }

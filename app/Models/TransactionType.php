@@ -5,8 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Department extends Model
+class TransactionType extends Model
 {
+    use HasFactory;
+
     use HasFactory;
 
      /**
@@ -20,4 +22,5 @@ class Department extends Model
         'updated_by',
         'created_at'
     ];
+    
 }
